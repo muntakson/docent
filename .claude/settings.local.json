@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(sudo ls:*)",
+      "Bash(sudo cp:*)",
+      "Bash(sudo -S cp:*)",
+      "Bash(sudo -S ls:*)",
+      "Bash(sudo -S ln:*)",
+      "Bash(sudo -S nginx -t:*)",
+      "Bash(sudo -S openssl req:*)",
+      "Bash(sudo -S bash -c 'openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/docent.rongrong.org.key -out /etc/ssl/certs/docent.rongrong.org.pem -subj \"\"\"\"/CN=docent.rongrong.org/O=Docent/C=KR\"\"\"\"')",
+      "Bash(sudo -S systemctl reload:*)",
+      "Bash(sudo -S systemctl daemon-reload:*)",
+      "Bash(sudo -S systemctl:*)",
+      "Bash(sudo -S systemctl start:*)",
+      "Bash(sudo -S journalctl:*)",
+      "Bash(sudo -S pip3 install:*)",
+      "Bash(sudo -S apt-get install:*)",
+      "Bash(sudo -S chmod:*)",
+      "Bash(sudo -S chown:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

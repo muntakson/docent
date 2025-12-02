@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">SerialPortUpgrade</string>
+    <string name="text_core_data">电量:%1$d,急停:%2$d,充电状态:%3$d</string>
+    <string name="text_ros_hostname">ROS主机名:%1$s</string>
+    <string name="text_ros_ip" translatable="false">ROS WIFI SSID:%1$s ROS IP:%2$s</string>
+    <string name="text_start_navigation_failed_1">正在对接充电桩,无法导航</string>
+    <string name="text_start_navigation_failed_2">急停开关被按下,无法导航</string>
+    <string name="text_start_navigation_failed_3">适配器充电中,无法导航</string>
+    <string name="text_start_navigation_failed_4">找不到目标点,无法导航</string>
+    <string name="text_start_navigation_failed_5">AGV对接失败,无法导航</string>
+    <string name="text_start_navigation_failed_6">定位异常,无法导航</string>
+    <string name="text_start_navigation_failed_7">固定路线点位间距过大,无法导航</string>
+    <string name="text_start_navigation_failed_8">找不到固定路线,无法导航</string>
+    <string name="text_start_navigation_failed_9">读取点位信息失败,无法导航</string>
+    <string name="text_navigation_success">导航到%1$s成功,共行走了%2$s米</string>
+    <string name="text_navigation_failed">导航失败</string>
+    <string name="text_start_navigation_success">机器开始导航,距离目标点直线距离:%1$s米</string>
+    <string name="text_go_straight_finish">直走完成</string>
+    <string name="text_turn_left_finish">左转完成</string>
+    <string name="text_turn_right_finish">右转完成</string>
+    <string name="text_cancel_navigation">取消导航</string>
+    <string name="text_navigation_to_point_a">导航去\'A\'点</string>
+    <string name="text_exit">退出</string>
+    <string name="text_go_ahead">前进0.1米</string>
+    <string name="text_refresh_ip">获取ROS IP</string>
+    <string name="text_refresh_hostname">获取主机名</string>
+    <string name="text_clean">清空</string>
+    <string name="text_not_connect">未连接</string>
+    <string name="text_can_navgation">是否可以导航</string>
+    <string name="text_speed_control">速度控制</string>
+    <string name="text_fix_point_navigation">固定路径点导航</string>
+    <string name="text_get_robot_type">获取机器类型</string>
+
+</resources>

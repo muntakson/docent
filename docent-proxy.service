@@ -1,0 +1,15 @@
+[Unit]
+Description=Docent AMR Proxy Server
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/docent
+ExecStart=/usr/bin/python3 /var/www/docent/proxy_server.py
+Restart=always
+RestartSec=5
+Environment=AMR_IP=192.168.219.42
+
+[Install]
+WantedBy=multi-user.target
