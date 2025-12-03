@@ -318,6 +318,64 @@
             transform: translateY(0);
         }
 
+        /* Fullscreen video player overlay */
+        .video-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #000;
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-overlay.show {
+            display: flex;
+        }
+
+        .video-overlay video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+        }
+
+        .video-overlay .video-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 1.5em;
+        }
+
+        .video-overlay .video-skip-btn {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            border: 2px solid rgba(255,255,255,0.5);
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 0.5s ease 3s forwards;
+        }
+
+        .video-overlay .video-skip-btn:hover {
+            background: rgba(255,255,255,0.4);
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
         /* Settings modal */
         .modal {
             display: none;
@@ -1240,9 +1298,576 @@
             font-size: 0.85em;
             color: #ffc107;
         }
+
+        /* ========== KIOSK MODE STYLES ========== */
+        .kiosk-mode {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(180deg, #0a0a15 0%, #1a1a2e 100%);
+            z-index: 3000;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .kiosk-mode.active {
+            display: flex;
+        }
+
+        /* Eyes Container */
+        .kiosk-eyes {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 80px;
+            padding: 40px;
+            flex-shrink: 0;
+        }
+
+        .kiosk-eye {
+            width: 120px;
+            height: 120px;
+            position: relative;
+        }
+
+        .eye-outer {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, #fff 0%, #e0e0e0 100%);
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(78, 204, 163, 0.5), inset 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .eye-iris {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 40% 40%, #4ecca3 0%, #1a6b4a 100%);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+
+        .eye-pupil {
+            width: 25px;
+            height: 25px;
+            background: radial-gradient(circle at 30% 30%, #333 0%, #000 100%);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .eye-highlight {
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 25%;
+            left: 30%;
+        }
+
+        .eye-eyelid {
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(180deg, #0a0a15 0%, #1a1a2e 100%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: height 0.15s ease;
+            border-radius: 50% 50% 0 0;
+        }
+
+        /* Eye animations */
+        @keyframes eyeIdle {
+            0%, 100% { transform: translate(-50%, -50%); }
+            25% { transform: translate(-45%, -50%); }
+            50% { transform: translate(-50%, -45%); }
+            75% { transform: translate(-55%, -50%); }
+        }
+
+        @keyframes eyeBlink {
+            0%, 45%, 55%, 100% { height: 0%; }
+            50% { height: 100%; }
+        }
+
+        @keyframes eyeHappy {
+            0%, 100% { border-radius: 50% 50% 50% 50%; height: 60px; }
+            50% { border-radius: 50% 50% 0% 0%; height: 40px; }
+        }
+
+        @keyframes eyeSpeak {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .kiosk-eye.idle .eye-iris {
+            animation: eyeIdle 4s ease-in-out infinite;
+        }
+
+        .kiosk-eye.idle .eye-eyelid {
+            animation: eyeBlink 4s ease-in-out infinite;
+        }
+
+        .kiosk-eye.welcome .eye-outer {
+            box-shadow: 0 0 40px rgba(78, 204, 163, 0.8);
+        }
+
+        .kiosk-eye.welcome .eye-iris {
+            background: radial-gradient(circle at 40% 40%, #ffc107 0%, #ff9800 100%);
+        }
+
+        .kiosk-eye.speaking .eye-iris {
+            animation: eyeSpeak 0.5s ease-in-out infinite;
+            background: radial-gradient(circle at 40% 40%, #e94560 0%, #b8354d 100%);
+        }
+
+        .kiosk-eye.guiding .eye-iris {
+            background: radial-gradient(circle at 40% 40%, #4ecca3 0%, #1a6b4a 100%);
+            animation: eyeIdle 2s ease-in-out infinite;
+        }
+
+        .kiosk-eye.charging .eye-iris {
+            background: radial-gradient(circle at 40% 40%, #ffc107 0%, #ff6b00 100%);
+        }
+
+        .kiosk-eye.charging .eye-eyelid {
+            height: 60%;
+        }
+
+        /* Kiosk Map */
+        .kiosk-map {
+            flex: 1;
+            margin: 0 40px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #0f3460;
+        }
+
+        .kiosk-map-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Robot Arrow Pointer */
+        .robot-pointer {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+
+        .robot-pointer svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 10px rgba(233, 69, 96, 0.8));
+        }
+
+        /* Status indicator on map */
+        .kiosk-status {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #4ecca3;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .kiosk-status .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #4ecca3;
+            animation: pulse 2s infinite;
+        }
+
+        /* Scrolling Banner */
+        .kiosk-banner {
+            height: 80px;
+            background: linear-gradient(90deg, #0f3460 0%, #1a1a2e 50%, #0f3460 100%);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+            border-top: 2px solid #0f3460;
+        }
+
+        .banner-content {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            animation: scrollBanner 20s linear infinite;
+            font-size: 2em;
+            color: #ffc107;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+
+        .banner-content span {
+            padding: 0 100px;
+        }
+
+        @keyframes scrollBanner {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Banner Settings Button */
+        .banner-settings-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .kiosk-banner:hover .banner-settings-btn {
+            opacity: 1;
+        }
+
+        /* Eyes clickable for exit */
+        .kiosk-eye {
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Make inner eye elements pass clicks to parent */
+        .kiosk-eye .eye-outer,
+        .kiosk-eye .eye-iris,
+        .kiosk-eye .eye-pupil,
+        .kiosk-eye .eye-highlight,
+        .kiosk-eye .eye-eyelid {
+            pointer-events: none !important;
+        }
+
+        /* Password Modal */
+        .password-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 5000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-modal.show {
+            display: flex;
+        }
+
+        .password-modal-content {
+            background: #1a1a2e;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            min-width: 300px;
+        }
+
+        .password-modal-content h3 {
+            color: #e94560;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .password-modal-content p {
+            color: #a0a0a0;
+            margin-bottom: 20px;
+        }
+
+        .password-modal-content input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #0f3460;
+            border-radius: 10px;
+            background: #0a0a15;
+            color: #fff;
+            font-size: 1.2em;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .password-modal-content input:focus {
+            outline: none;
+            border-color: #4ecca3;
+        }
+
+        .password-error {
+            color: #e94560;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .password-error.show {
+            display: block;
+        }
+
+        .password-modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .password-modal-buttons button {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .password-modal-buttons .cancel-btn {
+            background: #0f3460;
+            color: #fff;
+        }
+
+        .password-modal-buttons .confirm-btn {
+            background: #4ecca3;
+            color: #1a1a2e;
+        }
+
+        /* Start Button in Admin Dashboard */
+        .start-kiosk-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #4ecca3 0%, #16c784 100%);
+            color: #1a1a2e;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(78, 204, 163, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .start-kiosk-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(78, 204, 163, 0.6);
+        }
+
+        /* Banner Settings Modal */
+        .banner-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 4000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner-modal.show {
+            display: flex;
+        }
+
+        .banner-modal-content {
+            background: #1a1a2e;
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .banner-modal-content h3 {
+            color: #e94560;
+            margin-bottom: 20px;
+        }
+
+        .banner-modal-content label {
+            display: block;
+            color: #a0a0a0;
+            margin-bottom: 8px;
+            margin-top: 15px;
+        }
+
+        .banner-modal-content textarea {
+            width: 100%;
+            height: 100px;
+            padding: 12px;
+            border: 2px solid #0f3460;
+            border-radius: 10px;
+            background: #0a0a15;
+            color: #fff;
+            font-size: 1em;
+            resize: none;
+        }
+
+        .banner-modal-content input[type="range"] {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .banner-modal-content .speed-display {
+            text-align: center;
+            color: #4ecca3;
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        .banner-modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .banner-modal-buttons button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .banner-modal-buttons .save-btn {
+            background: #4ecca3;
+            color: #1a1a2e;
+        }
+
+        .banner-modal-buttons .cancel-btn {
+            background: #0f3460;
+            color: #fff;
+        }
+
+        /* Hide admin UI when kiosk is active */
+        body.kiosk-active .container,
+        body.kiosk-active header,
+        body.kiosk-active .start-kiosk-btn {
+            display: none;
+        }
     </style>
 </head>
 <body>
+    <!-- Fullscreen video player overlay for projector -->
+    <div class="video-overlay" id="videoOverlay">
+        <video id="projectorVideo" playsinline></video>
+        <div class="video-loading" id="videoLoading">영상 로딩 중...</div>
+        <button class="video-skip-btn" id="videoSkipBtn" onclick="closeVideoPlayer()">건너뛰기</button>
+    </div>
+
+    <!-- Start Kiosk Button (Admin Dashboard) -->
+    <button class="start-kiosk-btn" id="startKioskBtn" onclick="startKioskMode()">
+        START
+    </button>
+
+    <!-- Kiosk Mode UI -->
+    <div class="kiosk-mode" id="kioskMode">
+        <!-- Animated Eyes (double-click to exit) -->
+        <div class="kiosk-eyes">
+            <div class="kiosk-eye idle" id="kioskLeftEye" onclick="handleEyeClick(event)">
+                <div class="eye-outer">
+                    <div class="eye-iris">
+                        <div class="eye-pupil"></div>
+                        <div class="eye-highlight"></div>
+                    </div>
+                    <div class="eye-eyelid"></div>
+                </div>
+            </div>
+            <div class="kiosk-eye idle" id="kioskRightEye" onclick="handleEyeClick(event)">
+                <div class="eye-outer">
+                    <div class="eye-iris">
+                        <div class="eye-pupil"></div>
+                        <div class="eye-highlight"></div>
+                    </div>
+                    <div class="eye-eyelid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Display -->
+        <div class="kiosk-map" id="kioskMapContainer">
+            <canvas class="kiosk-map-canvas" id="kioskMapCanvas"></canvas>
+            <!-- Robot Arrow Pointer -->
+            <div class="robot-pointer" id="robotPointer">
+                <svg viewBox="0 0 24 24" fill="#e94560">
+                    <path d="M12 2L4 20h16L12 2z"/>
+                </svg>
+            </div>
+            <!-- Status Display -->
+            <div class="kiosk-status" id="kioskStatus">
+                <div class="status-dot"></div>
+                <span id="kioskStatusText">대기 중</span>
+            </div>
+        </div>
+
+        <!-- Scrolling Banner -->
+        <div class="kiosk-banner" id="kioskBanner">
+            <div class="banner-content" id="bannerContent">
+                <span id="bannerText">이천 서희도서관에 오신 것을 환영합니다! 서희봇과 함께 즐거운 도서관 탐험을 시작해보세요!</span>
+            </div>
+            <button class="banner-settings-btn" onclick="openBannerSettings()">배너 설정</button>
+        </div>
+    </div>
+
+    <!-- Kiosk Exit Password Modal -->
+    <div class="password-modal" id="passwordModal">
+        <div class="password-modal-content">
+            <h3>관리자 인증</h3>
+            <p>비밀번호를 입력하세요</p>
+            <input type="password" id="exitPasswordInput" placeholder="비밀번호" autofocus>
+            <div class="password-error" id="passwordError">비밀번호가 틀렸습니다</div>
+            <div class="password-modal-buttons">
+                <button class="cancel-btn" onclick="closePasswordModal()">취소</button>
+                <button class="confirm-btn" onclick="verifyPassword()">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Banner Settings Modal -->
+    <div class="banner-modal" id="bannerModal">
+        <div class="banner-modal-content">
+            <h3>배너 설정</h3>
+            <label>배너 메시지</label>
+            <textarea id="bannerTextInput" placeholder="스크롤될 메시지를 입력하세요..."></textarea>
+            <label>스크롤 속도</label>
+            <input type="range" id="bannerSpeedInput" min="5" max="60" value="20">
+            <div class="speed-display"><span id="speedValue">20</span>초</div>
+            <div class="banner-modal-buttons">
+                <button class="cancel-btn" onclick="closeBannerSettings()">취소</button>
+                <button class="save-btn" onclick="saveBannerSettings()">저장</button>
+            </div>
+        </div>
+    </div>
+
     <div class="announcement-banner" id="announcementBanner">
         도서관에 오신 것을 환영합니다!
     </div>
@@ -1306,7 +1931,7 @@
                             <span>지도제작</span>
                         </button>
                         <button class="action-btn speech" onclick="openSpeechModal()">
-                            <span>음성</span>
+                            <span>음성/영상</span>
                         </button>
                         <button class="action-btn pause" onclick="pauseNavigation()">
                             <span>일시정지</span>
@@ -1386,8 +2011,8 @@
         <div class="modal-content">
             <h2>설정</h2>
             <div class="form-group">
-                <label>로봇 IP 주소</label>
-                <input type="text" id="amrIpInput" value="192.168.219.42">
+                <label>네비게이션 서버 주소</label>
+                <input type="text" id="amrIpInput" placeholder="예: 192.168.219.42">
             </div>
             <div class="form-group">
                 <label>이동 속도</label>
@@ -1500,8 +2125,8 @@
     <!-- Speech/Zone Management Modal -->
     <div class="modal" id="speechModal">
         <div class="modal-content route-modal-content">
-            <h2>존 음성 관리</h2>
-            <p style="color: #a0a0a0; margin-bottom: 20px;">각 존에 도착하면 설정된 멘트를 읽어줍니다. 포인트는 단순히 "포인트 X에 도착했어요"라고 안내합니다.</p>
+            <h2>존 음성/영상 관리</h2>
+            <p style="color: #a0a0a0; margin-bottom: 20px;">각 존에 도착하면 설정된 멘트를 읽고, 영상 URL이 있으면 프로젝터로 재생합니다.</p>
 
             <div class="zone-list" id="zoneList">
                 <!-- Zone items will be rendered here -->
@@ -1622,77 +2247,125 @@
     <script>
         // Configuration
         const API_BASE = '/api';  // Proxy server
-        let AMR_IP = '192.168.219.42';
+        let AMR_IP = '192.168.219.42';  // Will be loaded from backend
         let voiceEnabled = true;
+
+        // Load settings from backend
+        async function loadSettings() {
+            try {
+                const response = await fetch(`${API_BASE}/settings`);
+                const settings = await response.json();
+                if (settings.amr_ip) {
+                    AMR_IP = settings.amr_ip;
+                    document.getElementById('amrIpInput').value = AMR_IP;
+                    log(`설정 로드됨: AMR IP = ${AMR_IP}`, 'info');
+                }
+                return settings;
+            } catch (error) {
+                log(`설정 로드 실패: ${error.message}`, 'error');
+                return { amr_ip: AMR_IP };
+            }
+        }
         let currentWaypoints = [];
         let robotPose = { x: 0, y: 0, theta: 0 };
         let mapBounds = { minX: -1.5, maxX: 0.8, minY: -1, maxY: 1 };
         let lastNavState = null;
         let statusInterval = null;
+        let isCharging = false;
 
-        // Zone definitions with pre-stored speech text
+        // Zone definitions with pre-stored speech text and video URLs
         // Zones are special locations with long speech, Points just get simple announcements
+        // Video plays via projector after speech finishes
         const defaultZones = [
             {
                 id: 'zone1',
                 name: '웰컴 존',
                 pointName: '',  // Will be mapped to a waypoint
-                speech: '안녕 나는 서희봇이야! 이천 서희도서관 맘대로 에이플러스 놀이터에 온걸을 환영해! 미래에서 가장 중요한 에이아이와 반도체에 대해서 즐겁게 알아보는 시간을 가져볼까?'
+                speech: '안녕 나는 서희봇이야! 이천 서희도서관 맘대로 에이플러스 놀이터에 온걸을 환영해! 미래에서 가장 중요한 에이아이와 반도체에 대해서 즐겁게 알아보는 시간을 가져볼까?',
+                videoUrl: 'https://storage.iotok.org/download/23/docentbot.mp4'  // Video to play after speech
             },
             {
                 id: 'zone2',
                 name: '미디어 존',
                 pointName: '',
-                speech: '앞으로 우리가 살아갈 미래에 가장 중요한 것이 인공지능과 반도체야! 우리 생활속에서 어떻게 사용되는지 함께 알아보고 우리가 만들어갈 미래에 대해서도 함께 이야기해볼까?'
+                speech: '앞으로 우리가 살아갈 미래에 가장 중요한 것이 인공지능과 반도체야! 우리 생활속에서 어떻게 사용되는지 함께 알아보고 우리가 만들어갈 미래에 대해서도 함께 이야기해볼까?',
+                videoUrl: ''  // Add video URL when available
             },
             {
                 id: 'zone3',
                 name: '인터렉티브 존',
                 pointName: '',
-                speech: '인공지능과 반도체가 어떻게 작동되는지 우리 체험놀이를 통해서 알아볼까?'
+                speech: '인공지능과 반도체가 어떻게 작동되는지 우리 체험놀이를 통해서 알아볼까?',
+                videoUrl: ''
             },
             {
                 id: 'zone4',
                 name: '홀로그램 존',
                 pointName: '',
-                speech: '우와! 다양한 물고기 로봇을 만들고 있네? 이런 로봇에 들어가는 인공지능 반도체는 어떤 모습일까? 반도체가 어떻게 생겼는지 함께 알아볼까? 렛츠고!'
+                speech: '우와! 다양한 물고기 로봇을 만들고 있네? 이런 로봇에 들어가는 인공지능 반도체는 어떤 모습일까? 반도체가 어떻게 생겼는지 함께 알아볼까? 렛츠고!',
+                videoUrl: ''
             },
             {
                 id: 'zone5',
                 name: '미래역량체험 존',
                 pointName: '',
-                speech: '여기는 마음껏 뛰어놀고 함께 미래역량 체험놀이터야! 놀다보면 나도모르게 미래 창의역량, 협동역량, 비판적사고역량, 의사소통능력이 생기는 곳이지!'
+                speech: '여기는 마음껏 뛰어놀고 함께 미래역량 체험놀이터야! 놀다보면 나도모르게 미래 창의역량, 협동역량, 비판적사고역량, 의사소통능력이 생기는 곳이지!',
+                videoUrl: ''
             },
             {
                 id: 'zone6',
                 name: '메모리 존',
                 pointName: '',
-                speech: '오늘 체험은 즐거웠니? 헤어지는게 너무 아쉬워서 사진을 찍었어! 우리 소중한 추억을 함께 기억할께! 다음에 보자!'
+                speech: '오늘 체험은 즐거웠니? 헤어지는게 너무 아쉬워서 사진을 찍었어! 우리 소중한 추억을 함께 기억할께! 다음에 보자!',
+                videoUrl: ''
             }
         ];
 
         let zones = [];
 
-        // Load zones from localStorage or use defaults
-        function loadZones() {
-            const saved = localStorage.getItem('docentZones');
-            if (saved) {
-                zones = JSON.parse(saved);
-            } else {
+        // Load zones from backend API
+        async function loadZones() {
+            try {
+                const response = await fetch('/api/zones');
+                if (response.ok) {
+                    zones = await response.json();
+                    log('존 설정 로드 완료', 'info');
+                } else {
+                    throw new Error('Failed to load zones');
+                }
+            } catch (error) {
+                log(`존 설정 로드 실패: ${error.message}`, 'error');
+                // Fallback to defaults
                 zones = JSON.parse(JSON.stringify(defaultZones));
             }
         }
 
-        // Save zones to localStorage
-        function saveZonesToStorage() {
-            localStorage.setItem('docentZones', JSON.stringify(zones));
+        // Save zones to backend API
+        async function saveZonesToStorage() {
+            try {
+                const response = await fetch('/api/zones', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(zones)
+                });
+                if (response.ok) {
+                    log('존 설정 저장 완료', 'success');
+                    return true;
+                } else {
+                    const error = await response.json();
+                    throw new Error(error.error || 'Failed to save zones');
+                }
+            } catch (error) {
+                log(`존 설정 저장 실패: ${error.message}`, 'error');
+                return false;
+            }
         }
 
-        // Get speech text for a waypoint (returns null if it's just a point, not a zone)
+        // Get speech text and video for a waypoint (returns null if it's just a point, not a zone)
         function getZoneSpeech(waypointName) {
             const zone = zones.find(z => z.pointName === waypointName);
             if (zone) {
-                return { zoneName: zone.name, speech: zone.speech };
+                return { zoneName: zone.name, speech: zone.speech, videoUrl: zone.videoUrl || '' };
             }
             return null;
         }
@@ -1706,13 +2379,15 @@
         }
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            log('시스템 초기화 완료', 'info');
-            loadZones();
+        document.addEventListener('DOMContentLoaded', async () => {
+            log('시스템 초기화 중...', 'info');
+            await loadSettings();  // Load AMR IP from backend first
+            await loadZones();
             loadWaypoints();
             startStatusPolling();
             drawMap();
             checkTTSAvailability();
+            log('시스템 초기화 완료', 'success');
         });
 
         // Logging function
@@ -1964,11 +2639,13 @@
                 updateBatteryDisplay(baseEncode.battery);
                 updateConnectionStatus(true);
 
-                // Check emergency button
+                // Check emergency button and charging state
+                isCharging = baseEncode.chargeFlag === 2;
+
                 if (baseEncode.emergencyButton === 0) {
                     document.getElementById('robotStatus').textContent = 'E-STOP';
                     document.getElementById('robotStatus').className = 'value danger';
-                } else if (baseEncode.chargeFlag === 2) {
+                } else if (isCharging) {
                     document.getElementById('robotStatus').textContent = 'Charging';
                     document.getElementById('robotStatus').className = 'value';
                 }
@@ -2040,7 +2717,7 @@
         }
 
         // Called when robot arrives at destination
-        function onArrival(goalName) {
+        async function onArrival(goalName) {
             log(`${goalName}에 도착`, 'success');
 
             if (voiceEnabled) {
@@ -2050,10 +2727,22 @@
                 if (zoneInfo) {
                     // This is a zone - speak the full zone speech
                     log(`${zoneInfo.zoneName} 안내 시작`, 'info');
-                    speak(zoneInfo.speech);
                     showAnnouncement(zoneInfo.zoneName);
+
+                    try {
+                        // Wait for speech to complete
+                        await speak(zoneInfo.speech);
+
+                        // After speech ends, play video if available
+                        if (zoneInfo.videoUrl) {
+                            log(`${zoneInfo.zoneName} 영상 재생`, 'info');
+                            await playVideo(zoneInfo.videoUrl);
+                        }
+                    } catch (err) {
+                        log(`안내 오류: ${err.message}`, 'error');
+                    }
                 } else {
-                    // This is just a point - simple announcement
+                    // This is just a point - simple announcement (no video)
                     const announcement = getPointAnnouncement(goalName);
                     speak(announcement);
                     showAnnouncement(announcement);
@@ -2183,6 +2872,89 @@
             }, 5000);
         }
 
+        // Video player state
+        let isVideoPlaying = false;
+        let videoResolve = null;
+
+        // Play video in fullscreen overlay (for projector)
+        // Returns a Promise that resolves when video ends or is skipped
+        function playVideo(videoUrl) {
+            return new Promise((resolve, reject) => {
+                if (!videoUrl) {
+                    resolve();
+                    return;
+                }
+
+                const overlay = document.getElementById('videoOverlay');
+                const video = document.getElementById('projectorVideo');
+                const loading = document.getElementById('videoLoading');
+                const skipBtn = document.getElementById('videoSkipBtn');
+
+                // Store resolve function for skip button
+                videoResolve = resolve;
+                isVideoPlaying = true;
+
+                // Show loading indicator
+                loading.style.display = 'block';
+                skipBtn.style.animation = 'none';
+                skipBtn.style.opacity = '0';
+
+                // Set video source
+                video.src = videoUrl;
+
+                // Event handlers
+                video.onloadeddata = () => {
+                    loading.style.display = 'none';
+                    // Re-enable skip button animation after video loads
+                    skipBtn.style.animation = 'fadeIn 0.5s ease 3s forwards';
+                };
+
+                video.onended = () => {
+                    closeVideoPlayer();
+                };
+
+                video.onerror = (e) => {
+                    log(`영상 재생 오류: ${e.message || 'Unknown error'}`, 'error');
+                    closeVideoPlayer();
+                };
+
+                // Show overlay and play
+                overlay.classList.add('show');
+                video.play().catch(err => {
+                    log(`영상 자동재생 실패: ${err.message}`, 'error');
+                    // On autoplay failure, show a message but keep overlay open
+                    // User can tap to play or skip
+                    loading.textContent = '화면을 터치하여 재생';
+                    loading.style.display = 'block';
+                    overlay.onclick = () => {
+                        video.play();
+                        loading.style.display = 'none';
+                        overlay.onclick = null;
+                    };
+                });
+
+                log('영상 재생 시작', 'info');
+            });
+        }
+
+        // Close video player and resolve promise
+        function closeVideoPlayer() {
+            const overlay = document.getElementById('videoOverlay');
+            const video = document.getElementById('projectorVideo');
+
+            video.pause();
+            video.src = '';
+            overlay.classList.remove('show');
+            isVideoPlaying = false;
+
+            if (videoResolve) {
+                videoResolve();
+                videoResolve = null;
+            }
+
+            log('영상 재생 종료', 'info');
+        }
+
         // Map drawing
         function drawMap() {
             const canvas = document.getElementById('mapCanvas');
@@ -2280,6 +3052,9 @@
 
         // Settings
         function openSettings() {
+            // Load current AMR IP into form
+            document.getElementById('amrIpInput').value = AMR_IP;
+
             // Load current TTS settings into form
             document.getElementById('ttsVoiceSelect').value = ttsVoice;
             document.getElementById('ttsRateInput').value = ttsRate;
@@ -2297,11 +3072,29 @@
             document.getElementById('settingsModal').classList.remove('show');
         }
 
-        function saveSettings() {
-            AMR_IP = document.getElementById('amrIpInput').value;
+        async function saveSettings() {
+            const newAmrIp = document.getElementById('amrIpInput').value;
             voiceEnabled = document.getElementById('voiceEnabledSelect').value === 'true';
 
-            // Save TTS settings
+            // Save AMR IP to backend for persistence
+            try {
+                const response = await fetch(`${API_BASE}/settings`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ amr_ip: newAmrIp })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    AMR_IP = newAmrIp;
+                    log(`네비게이션 서버 주소 저장됨: ${AMR_IP}`, 'success');
+                } else {
+                    log(`설정 저장 실패: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                log(`설정 저장 실패: ${error.message}`, 'error');
+            }
+
+            // Save TTS settings to localStorage
             ttsVoice = document.getElementById('ttsVoiceSelect').value;
             ttsRate = parseFloat(document.getElementById('ttsRateInput').value);
 
@@ -2947,6 +3740,14 @@
                     <textarea class="zone-speech"
                         id="speech-${zone.id}"
                         placeholder="이 존에서 할 멘트를 입력하세요...">${zone.speech}</textarea>
+                    <div class="zone-video-url">
+                        <input type="text"
+                            id="video-${zone.id}"
+                            placeholder="영상 URL (음성 후 프로젝터 재생)"
+                            value="${zone.videoUrl || ''}"
+                            style="width:100%; padding:8px; border:1px solid #0f3460; border-radius:5px; background:#0a0a15; color:#fff; margin-top:5px;">
+                        <button class="test-btn" onclick="testZoneVideo('${zone.id}')" style="margin-top:5px;">영상 테스트</button>
+                    </div>
                     <div class="zone-controls">
                         <select id="point-${zone.id}" onchange="updateZonePoint('${zone.id}', this.value)">
                             <option value="">-- 포인트 선택 --</option>
@@ -2954,7 +3755,7 @@
                                 `<option value="${wp.name}" ${zone.pointName === wp.name ? 'selected' : ''}>${wp.name} (${wp.type})</option>`
                             ).join('')}
                         </select>
-                        <button class="test-btn" onclick="testZoneSpeech('${zone.id}')">테스트</button>
+                        <button class="test-btn" onclick="testZoneSpeech('${zone.id}')">음성 테스트</button>
                     </div>
                 </div>
             `).join('');
@@ -2981,25 +3782,42 @@
             const text = textarea.value.trim();
             if (text) {
                 speak(text);
-                log(`테스트 재생: ${zones.find(z => z.id === zoneId)?.name}`, 'info');
+                log(`음성 테스트: ${zones.find(z => z.id === zoneId)?.name}`, 'info');
             } else {
                 log('멘트를 입력하세요', 'error');
             }
         }
 
+        // Test zone video
+        function testZoneVideo(zoneId) {
+            const input = document.getElementById(`video-${zoneId}`);
+            const videoUrl = input.value.trim();
+            if (videoUrl) {
+                playVideo(videoUrl);
+                log(`영상 테스트: ${zones.find(z => z.id === zoneId)?.name}`, 'info');
+            } else {
+                log('영상 URL을 입력하세요', 'error');
+            }
+        }
+
         // Save zones
-        function saveZones() {
-            // Update speech text from textareas
+        async function saveZones() {
+            // Update speech text and video URL from inputs
             zones.forEach(zone => {
                 const textarea = document.getElementById(`speech-${zone.id}`);
                 if (textarea) {
                     zone.speech = textarea.value.trim();
                 }
+                const videoInput = document.getElementById(`video-${zone.id}`);
+                if (videoInput) {
+                    zone.videoUrl = videoInput.value.trim();
+                }
             });
 
-            saveZonesToStorage();
-            log('존 설정이 저장되었습니다', 'success');
-            closeSpeechModal();
+            const success = await saveZonesToStorage();
+            if (success) {
+                closeSpeechModal();
+            }
         }
 
         // ========== BUILD MAP MODE ==========
@@ -3043,9 +3861,9 @@
                 fetchSlamMap();
             }, 100);
 
-            // Speak instruction - use safe speak that handles autoplay errors
-            const instruction = '지금부터 지도를 제작합니다. 로봇을 직접 밀어서 이동하려면 비상정지 버튼을 누르세요. 조종 버튼으로 이동하려면 비상정지 버튼을 해제하세요.';
-            speakSafe(instruction);
+            // TTS disabled for build map mode
+            // const instruction = '지금부터 지도를 제작합니다. 로봇을 직접 밀어서 이동하려면 비상정지 버튼을 누르세요. 조종 버튼으로 이동하려면 비상정지 버튼을 해제하세요.';
+            // speakSafe(instruction);
             showAnnouncement('지도 제작 모드');
 
             log('지도 제작 모드 시작', 'info');
@@ -3149,6 +3967,8 @@
                     img.onload = () => {
                         slamMapImage = img;
                         console.log('SLAM map loaded:', slamMapInfo);
+                        // Immediately redraw canvas to show the map
+                        drawBuildMap({ x: 0, y: 0, theta: 0 });
                     };
                     img.onerror = () => {
                         console.log('Failed to load SLAM map image');
@@ -3707,7 +4527,7 @@
                 if (result.status === 'success') {
                     const typeLabel = isChargingDock ? '충전 도크' : '위치';
                     log(`${typeLabel} "${name}" 저장됨 (x: ${pose.x.toFixed(2)}, y: ${pose.y.toFixed(2)})`, 'success');
-                    speakSafe(`${name} ${typeLabel}를 저장했습니다`);
+                    // speakSafe(`${name} ${typeLabel}를 저장했습니다`);
                 } else {
                     log(`위치 저장 실패: ${JSON.stringify(result)}`, 'error');
                 }
@@ -3806,7 +4626,7 @@
                 await fetchSlamMap();
 
                 log('새 지도 시작됨! 로봇을 움직여 지도를 만드세요.', 'success');
-                speakSafe('새 지도 시작. 로봇을 움직여 지도를 만드세요.');
+                // speakSafe('새 지도 시작. 로봇을 움직여 지도를 만드세요.');
 
             } catch (error) {
                 log(`새 지도 시작 실패: ${error.message}`, 'error');
@@ -3845,7 +4665,7 @@
 
                 if (result.status === 'success') {
                     log(`지도 "${name}" AMR에 저장됨`, 'success');
-                    speakSafe(`지도 ${name}이 저장되었습니다`);
+                    // speakSafe(`지도 ${name}이 저장되었습니다`);
 
                     // Also save locally
                     savedMaps[name.trim()] = {
@@ -3950,6 +4770,369 @@
         window.addEventListener('resize', () => {
             if (document.getElementById('buildMapModal').classList.contains('show')) {
                 initBuildMapCanvas();
+            }
+            // Also resize kiosk map if active
+            if (isKioskMode) {
+                drawKioskMap();
+            }
+        });
+
+        // ========== KIOSK MODE ==========
+
+        let isKioskMode = false;
+        let kioskEyeState = 'idle';  // idle, welcome, guiding, speaking, charging
+        let bannerText = localStorage.getItem('bannerText') || '이천 서희도서관에 오신 것을 환영합니다! 서희봇과 함께 즐거운 도서관 탐험을 시작해보세요!';
+        let bannerSpeed = parseInt(localStorage.getItem('bannerSpeed')) || 20;
+        let kioskMapInterval = null;
+
+        // Start Kiosk Mode
+        function startKioskMode() {
+            isKioskMode = true;
+            document.body.classList.add('kiosk-active');
+            document.getElementById('kioskMode').classList.add('active');
+
+            // Initialize kiosk components
+            setKioskEyeState('idle');
+            updateBannerDisplay();
+            drawKioskMap();
+
+            // Start kiosk map update interval
+            kioskMapInterval = setInterval(() => {
+                if (isKioskMode) {
+                    updateKioskRobotPointer();
+                    updateKioskStatus();
+                }
+            }, 500);
+
+            // Setup double-click exit on eyes
+            setupEyeDoubleClick();
+
+            log('키오스크 모드 시작', 'info');
+        }
+
+        // Exit Kiosk Mode
+        function exitKioskMode() {
+            isKioskMode = false;
+            document.body.classList.remove('kiosk-active');
+            document.getElementById('kioskMode').classList.remove('active');
+
+            // Clear intervals
+            if (kioskMapInterval) {
+                clearInterval(kioskMapInterval);
+                kioskMapInterval = null;
+            }
+
+            log('키오스크 모드 종료', 'info');
+        }
+
+        // Double-click/double-tap on eyes to show password modal
+        const ADMIN_PASSWORD = 'q1';
+        let eyeClickCount = 0;
+        let eyeClickTimer = null;
+
+        function setupEyeDoubleClick() {
+            // Event listeners now added via onclick in HTML
+            eyeClickCount = 0;
+        }
+
+        function handleEyeClick(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            eyeClickCount++;
+
+            if (eyeClickTimer) {
+                clearTimeout(eyeClickTimer);
+            }
+
+            if (eyeClickCount >= 2) {
+                // Double click detected
+                eyeClickCount = 0;
+                showPasswordModal();
+            } else {
+                // Wait for second click
+                eyeClickTimer = setTimeout(() => {
+                    eyeClickCount = 0;
+                }, 500); // 500ms window for double click
+            }
+        }
+
+        function showPasswordModal() {
+            document.getElementById('passwordModal').classList.add('show');
+            document.getElementById('exitPasswordInput').value = '';
+            document.getElementById('passwordError').classList.remove('show');
+
+            // Focus on input after a short delay (for mobile)
+            setTimeout(() => {
+                document.getElementById('exitPasswordInput').focus();
+            }, 100);
+        }
+
+        function closePasswordModal() {
+            document.getElementById('passwordModal').classList.remove('show');
+            document.getElementById('exitPasswordInput').value = '';
+            document.getElementById('passwordError').classList.remove('show');
+        }
+
+        function verifyPassword() {
+            const input = document.getElementById('exitPasswordInput');
+            const password = input.value;
+
+            if (password === ADMIN_PASSWORD) {
+                closePasswordModal();
+                exitKioskMode();
+            } else {
+                document.getElementById('passwordError').classList.add('show');
+                input.value = '';
+                input.focus();
+
+                // Hide error after 2 seconds
+                setTimeout(() => {
+                    document.getElementById('passwordError').classList.remove('show');
+                }, 2000);
+            }
+        }
+
+        // Allow Enter key to submit password
+        document.addEventListener('DOMContentLoaded', () => {
+            const passwordInput = document.getElementById('exitPasswordInput');
+            if (passwordInput) {
+                passwordInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        verifyPassword();
+                    }
+                });
+            }
+        });
+
+        // Set Eye State
+        function setKioskEyeState(state) {
+            kioskEyeState = state;
+            const leftEye = document.getElementById('kioskLeftEye');
+            const rightEye = document.getElementById('kioskRightEye');
+
+            // Remove all state classes
+            const states = ['idle', 'welcome', 'guiding', 'speaking', 'charging'];
+            states.forEach(s => {
+                leftEye.classList.remove(s);
+                rightEye.classList.remove(s);
+            });
+
+            // Add current state class
+            leftEye.classList.add(state);
+            rightEye.classList.add(state);
+        }
+
+        // Draw Kiosk Map
+        function drawKioskMap() {
+            const canvas = document.getElementById('kioskMapCanvas');
+            const container = document.getElementById('kioskMapContainer');
+
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+
+            const ctx = canvas.getContext('2d');
+
+            // Clear canvas
+            ctx.fillStyle = '#0a0a15';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw grid
+            ctx.strokeStyle = '#1a1a2e';
+            ctx.lineWidth = 1;
+            const gridSize = 50;
+
+            for (let x = 0; x < canvas.width; x += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+
+            for (let y = 0; y < canvas.height; y += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+
+            // Draw map image if available
+            if (mapImage) {
+                const scale = Math.min(
+                    canvas.width / mapImage.width,
+                    canvas.height / mapImage.height
+                ) * 0.9;
+
+                const imgWidth = mapImage.width * scale;
+                const imgHeight = mapImage.height * scale;
+                const imgX = (canvas.width - imgWidth) / 2;
+                const imgY = (canvas.height - imgHeight) / 2;
+
+                ctx.globalAlpha = 0.8;
+                ctx.drawImage(mapImage, imgX, imgY, imgWidth, imgHeight);
+                ctx.globalAlpha = 1;
+            }
+
+            // Draw waypoints
+            if (currentWaypoints && currentWaypoints.length > 0) {
+                currentWaypoints.forEach(wp => {
+                    const pos = worldToKioskCanvas(wp.pose.x, wp.pose.y);
+
+                    // Draw waypoint marker
+                    ctx.beginPath();
+                    if (wp.type === 'charge') {
+                        ctx.fillStyle = '#ffc107';
+                        ctx.arc(pos.x, pos.y, 12, 0, Math.PI * 2);
+                    } else {
+                        ctx.fillStyle = '#4ecca3';
+                        ctx.arc(pos.x, pos.y, 10, 0, Math.PI * 2);
+                    }
+                    ctx.fill();
+
+                    // Draw label
+                    ctx.fillStyle = '#fff';
+                    ctx.font = '12px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(wp.name, pos.x, pos.y + 25);
+                });
+            }
+
+            // Update robot pointer position
+            updateKioskRobotPointer();
+        }
+
+        // Convert world coordinates to kiosk canvas coordinates
+        function worldToKioskCanvas(worldX, worldY) {
+            const canvas = document.getElementById('kioskMapCanvas');
+
+            // Use same map bounds as main map
+            const mapWidth = mapBounds.maxX - mapBounds.minX;
+            const mapHeight = mapBounds.maxY - mapBounds.minY;
+
+            const scaleX = (canvas.width * 0.8) / mapWidth;
+            const scaleY = (canvas.height * 0.8) / mapHeight;
+            const scale = Math.min(scaleX, scaleY);
+
+            const offsetX = canvas.width / 2;
+            const offsetY = canvas.height / 2;
+
+            return {
+                x: offsetX + (worldX - (mapBounds.minX + mapWidth / 2)) * scale,
+                y: offsetY - (worldY - (mapBounds.minY + mapHeight / 2)) * scale
+            };
+        }
+
+        // Update Robot Pointer in Kiosk Map
+        function updateKioskRobotPointer() {
+            if (!robotPose || !isKioskMode) return;
+
+            const pointer = document.getElementById('robotPointer');
+            const pos = worldToKioskCanvas(robotPose.x, robotPose.y);
+
+            // Convert theta to degrees (theta is in radians, 0 = facing right)
+            // SVG arrow points up, so we need to adjust
+            const rotation = (robotPose.theta * 180 / Math.PI) - 90;
+
+            pointer.style.left = pos.x + 'px';
+            pointer.style.top = pos.y + 'px';
+            pointer.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+        }
+
+        // Update Kiosk Status Display
+        function updateKioskStatus() {
+            if (!isKioskMode) return;
+
+            const statusText = document.getElementById('kioskStatusText');
+            const statusDot = document.querySelector('.kiosk-status .status-dot');
+
+            // Get current navigation status
+            let status = '대기 중';
+            let eyeState = 'idle';
+            let dotColor = '#4ecca3';
+
+            if (lastNavState === 1) {
+                status = '이동 중';
+                eyeState = 'guiding';
+                dotColor = '#4ecca3';
+            } else if (lastNavState === 3) {
+                status = '도착';
+                eyeState = 'welcome';
+                dotColor = '#ffc107';
+            } else if (lastNavState === 4) {
+                status = '취소됨';
+                eyeState = 'idle';
+                dotColor = '#e94560';
+            }
+
+            // Check if speaking (audio playing)
+            if (currentAudio && !currentAudio.paused) {
+                status = '안내 중';
+                eyeState = 'speaking';
+                dotColor = '#e94560';
+            }
+
+            // Check if charging
+            if (isCharging) {
+                status = '충전 중';
+                eyeState = 'charging';
+                dotColor = '#ffc107';
+            }
+
+            statusText.textContent = status;
+            statusDot.style.background = dotColor;
+
+            // Update eye state if changed
+            if (kioskEyeState !== eyeState) {
+                setKioskEyeState(eyeState);
+            }
+        }
+
+        // Banner Settings Functions
+        function openBannerSettings() {
+            document.getElementById('bannerTextInput').value = bannerText;
+            document.getElementById('bannerSpeedInput').value = bannerSpeed;
+            document.getElementById('speedValue').textContent = bannerSpeed;
+            document.getElementById('bannerModal').classList.add('show');
+        }
+
+        function closeBannerSettings() {
+            document.getElementById('bannerModal').classList.remove('show');
+        }
+
+        function saveBannerSettings() {
+            bannerText = document.getElementById('bannerTextInput').value.trim() || '환영합니다!';
+            bannerSpeed = parseInt(document.getElementById('bannerSpeedInput').value) || 20;
+
+            // Save to localStorage
+            localStorage.setItem('bannerText', bannerText);
+            localStorage.setItem('bannerSpeed', bannerSpeed.toString());
+
+            // Update display
+            updateBannerDisplay();
+
+            closeBannerSettings();
+            log('배너 설정 저장됨', 'success');
+        }
+
+        function updateBannerDisplay() {
+            const bannerEl = document.getElementById('bannerText');
+            const contentEl = document.getElementById('bannerContent');
+
+            bannerEl.textContent = bannerText;
+
+            // Update animation speed
+            contentEl.style.animationDuration = bannerSpeed + 's';
+        }
+
+        // Speed slider update
+        document.addEventListener('DOMContentLoaded', () => {
+            const speedInput = document.getElementById('bannerSpeedInput');
+            if (speedInput) {
+                speedInput.addEventListener('input', (e) => {
+                    document.getElementById('speedValue').textContent = e.target.value;
+                });
             }
         });
     </script>

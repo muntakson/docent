@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#6200EE</color>
+    <color name="primary_variant">#3700B3</color>
+    <color name="secondary">#03DAC6</color>
+    <color name="secondary_variant">#018786</color>
+
+    <color name="background_dark">#1A1A2E</color>
+    <color name="background_medium">#16213E</color>
+    <color name="surface">#0F3460</color>
+
+    <color name="eye_white">#FFFFFF</color>
+    <color name="eye_iris">#4A90D9</color>
+    <color name="eye_pupil">#1A1A1A</color>
+    <color name="eye_highlight">#FFFFFF</color>
+
+    <color name="mouth_color">#FF6B6B</color>
+    <color name="mouth_outline">#E55555</color>
+
+    <color name="button_start">#4CAF50</color>
+    <color name="button_start_pressed">#388E3C</color>
+    <color name="button_stop">#F44336</color>
+    <color name="button_stop_pressed">#D32F2F</color>
+    <color name="button_continue">#2196F3</color>
+    <color name="button_continue_pressed">#1976D2</color>
+
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B0B0B0</color>
+
+    <color name="status_idle">#FFC107</color>
+    <color name="status_active">#4CAF50</color>
+    <color name="status_error">#F44336</color>
+</resources>

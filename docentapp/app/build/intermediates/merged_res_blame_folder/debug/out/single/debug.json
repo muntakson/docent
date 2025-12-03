@@ -1,0 +1,66 @@
+[
+    {
+        "merged": "com.docent.bot.app-merged_res-46:/drawable_bg_status_dot.xml.flat",
+        "source": "com.docent.bot.app-main-48:/drawable/bg_status_dot.xml"
+    },
+    {
+        "merged": "com.docent.bot.app-merged_res-46:/layout_item_device.xml.flat",
+        "source": "com.docent.bot.app-main-48:/layout/item_device.xml"
+    },
+    {
+        "merged": "com.docent.bot.app-merged_res-46:/drawable_bg_speech_bubble.xml.flat",
+        "source": "com.docent.bot.app-main-48:/drawable/bg_speech_bubble.xml"
+    },
+    {
+        "merged": "com.docent.bot.app-merged_res-46:/drawable_ic_back.xml.flat",
+        "source": "com.docent.bot.app-main-48:/drawable/ic_back.xml"
+    },
+    {
+        "merged": "com.docent.bot.app-merged_res-46:/layout_activity_main.xml.flat",
+        "source": "com.docent.bot.app-main-48:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.docent.bot.app-merged_res-46:/xml_network_security_config.xml.flat",
+        "source": "com.docent.bot.app-main-48:/xml/network_security_config.xml"
+    },
+    {
+        "merged": "com.docent.bot.app-merged_res-46:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.docent.bot.app-main-48:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.docent.bot.app-merged_res-46:/drawable_ic_menu.xml.flat",
+        "source": "com.docent.bot.app-main-48:/drawable/ic_menu.xml"
+    },
+    {
+        "merged": "com.docent.bot.app-merged_res-46:/drawable_ic_play.xml.flat",
+        "source": "com.docent.bot.app-main-48:/drawable/ic_play.xml"
+    },
+    {
+        "merged": "com.docent.bot.app-merged_res-46:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.docent.bot.app-main-48:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.docent.bot.app-merged_res-46:/drawable_ic_check.xml.flat",
+        "source": "com.docent.bot.app-main-48:/drawable/ic_check.xml"
+    },
+    {
+        "merged": "com.docent.bot.app-merged_res-46:/drawable_ic_video.xml.flat",
+        "source": "com.docent.bot.app-main-48:/drawable/ic_video.xml"
+    },
+    {
+        "merged": "com.docent.bot.app-merged_res-46:/drawable_ic_projector.xml.flat",
+        "source": "com.docent.bot.app-main-48:/drawable/ic_projector.xml"
+    },
+    {
+        "merged": "com.docent.bot.app-merged_res-46:/layout_activity_settings.xml.flat",
+        "source": "com.docent.bot.app-main-48:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "com.docent.bot.app-merged_res-46:/drawable_ic_stop.xml.flat",
+        "source": "com.docent.bot.app-main-48:/drawable/ic_stop.xml"
+    },
+    {
+        "merged": "com.docent.bot.app-merged_res-46:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.docent.bot.app-main-48:/mipmap-anydpi-v26/ic_launcher.xml"
+    }
+]

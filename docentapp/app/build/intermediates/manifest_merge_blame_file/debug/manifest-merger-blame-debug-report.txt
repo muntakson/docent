@@ -1,0 +1,219 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.docent.bot"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="34" />
+10
+11    <!-- Network permissions -->
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:6:5-67
+12-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:6:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:7:5-79
+13-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:7:22-76
+14    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+14-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:8:5-76
+14-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:8:22-73
+15    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+15-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:9:5-86
+15-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:9:22-83
+16
+17    <!-- Storage permissions for video -->
+18    <uses-permission
+18-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:12:5-13:38
+19        android:name="android.permission.READ_EXTERNAL_STORAGE"
+19-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:12:22-77
+20        android:maxSdkVersion="32" />
+20-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:13:9-35
+21    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+21-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:14:5-75
+21-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:14:22-72
+22
+23    <!-- Foreground service -->
+24    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+24-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:17:5-77
+24-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:17:22-74
+25    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+25-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:18:5-92
+25-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:18:22-89
+26    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+26-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:19:5-77
+26-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:19:22-74
+27
+28    <!-- Keep screen on -->
+29    <uses-permission android:name="android.permission.WAKE_LOCK" />
+29-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:22:5-68
+29-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:22:22-65
+30
+31    <permission
+31-->[androidx.core:core:1.12.0] /home/jit/.gradle/caches/transforms-3/2ccd268e0ca2e1cd10ec650ac8067a3e/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
+32        android:name="com.docent.bot.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+32-->[androidx.core:core:1.12.0] /home/jit/.gradle/caches/transforms-3/2ccd268e0ca2e1cd10ec650ac8067a3e/transformed/core-1.12.0/AndroidManifest.xml:23:9-81
+33        android:protectionLevel="signature" />
+33-->[androidx.core:core:1.12.0] /home/jit/.gradle/caches/transforms-3/2ccd268e0ca2e1cd10ec650ac8067a3e/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
+34
+35    <uses-permission android:name="com.docent.bot.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+35-->[androidx.core:core:1.12.0] /home/jit/.gradle/caches/transforms-3/2ccd268e0ca2e1cd10ec650ac8067a3e/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
+35-->[androidx.core:core:1.12.0] /home/jit/.gradle/caches/transforms-3/2ccd268e0ca2e1cd10ec650ac8067a3e/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
+36
+37    <application
+37-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:24:5-65:19
+38        android:name="com.docent.bot.DocentApplication"
+38-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:25:9-42
+39        android:allowBackup="true"
+39-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:26:9-35
+40        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+40-->[androidx.core:core:1.12.0] /home/jit/.gradle/caches/transforms-3/2ccd268e0ca2e1cd10ec650ac8067a3e/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
+41        android:debuggable="true"
+42        android:extractNativeLibs="false"
+43        android:icon="@mipmap/ic_launcher"
+43-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:27:9-43
+44        android:label="@string/app_name"
+44-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:28:9-41
+45        android:networkSecurityConfig="@xml/network_security_config"
+45-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:32:9-69
+46        android:roundIcon="@mipmap/ic_launcher_round"
+46-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:29:9-54
+47        android:supportsRtl="true"
+47-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:30:9-35
+48        android:theme="@style/Theme.DocentBot" >
+48-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:31:9-47
+49        <activity
+49-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:35:9-45:20
+50            android:name="com.docent.bot.ui.MainActivity"
+50-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:36:13-44
+51            android:configChanges="orientation|screenSize|keyboardHidden"
+51-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:39:13-74
+52            android:exported="true"
+52-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:37:13-36
+53            android:screenOrientation="landscape"
+53-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:38:13-50
+54            android:theme="@style/Theme.DocentBot.Fullscreen" >
+54-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:40:13-62
+55            <intent-filter>
+55-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:41:13-44:29
+56                <action android:name="android.intent.action.MAIN" />
+56-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:42:17-69
+56-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:42:25-66
+57
+58                <category android:name="android.intent.category.LAUNCHER" />
+58-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:43:17-77
+58-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:43:27-74
+59            </intent-filter>
+60        </activity>
+61        <activity
+61-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:47:9-51:54
+62            android:name="com.docent.bot.ui.SettingsActivity"
+62-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:48:13-48
+63            android:exported="false"
+63-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:49:13-37
+64            android:screenOrientation="landscape"
+64-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:50:13-50
+65            android:theme="@style/Theme.DocentBot" />
+65-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:51:13-51
+66
+67        <!-- DLNA Discovery Service -->
+68        <service
+68-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:54:9-57:61
+69            android:name="com.docent.bot.service.DLNADiscoveryService"
+69-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:55:13-57
+70            android:exported="false"
+70-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:56:13-37
+71            android:foregroundServiceType="mediaPlayback" />
+71-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:57:13-58
+72
+73        <!-- Media Server Service -->
+74        <service
+74-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:60:9-63:61
+75            android:name="com.docent.bot.service.MediaServerService"
+75-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:61:13-55
+76            android:exported="false"
+76-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:62:13-37
+77            android:foregroundServiceType="mediaPlayback" />
+77-->/var/www/docent/docentapp/app/src/main/AndroidManifest.xml:63:13-58
+78
+79        <provider
+79-->[androidx.emoji2:emoji2:1.2.0] /home/jit/.gradle/caches/transforms-3/6f6fec51fc0bf858d6900b90dd62d6da/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+80            android:name="androidx.startup.InitializationProvider"
+80-->[androidx.emoji2:emoji2:1.2.0] /home/jit/.gradle/caches/transforms-3/6f6fec51fc0bf858d6900b90dd62d6da/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
+81            android:authorities="com.docent.bot.androidx-startup"
+81-->[androidx.emoji2:emoji2:1.2.0] /home/jit/.gradle/caches/transforms-3/6f6fec51fc0bf858d6900b90dd62d6da/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
+82            android:exported="false" >
+82-->[androidx.emoji2:emoji2:1.2.0] /home/jit/.gradle/caches/transforms-3/6f6fec51fc0bf858d6900b90dd62d6da/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
+83            <meta-data
+83-->[androidx.emoji2:emoji2:1.2.0] /home/jit/.gradle/caches/transforms-3/6f6fec51fc0bf858d6900b90dd62d6da/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+84                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+84-->[androidx.emoji2:emoji2:1.2.0] /home/jit/.gradle/caches/transforms-3/6f6fec51fc0bf858d6900b90dd62d6da/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
+85                android:value="androidx.startup" />
+85-->[androidx.emoji2:emoji2:1.2.0] /home/jit/.gradle/caches/transforms-3/6f6fec51fc0bf858d6900b90dd62d6da/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
+86            <meta-data
+86-->[androidx.lifecycle:lifecycle-process:2.6.2] /home/jit/.gradle/caches/transforms-3/b8d11ad8426ba34454d5792641948162/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:29:13-31:52
+87                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+87-->[androidx.lifecycle:lifecycle-process:2.6.2] /home/jit/.gradle/caches/transforms-3/b8d11ad8426ba34454d5792641948162/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:30:17-78
+88                android:value="androidx.startup" />
+88-->[androidx.lifecycle:lifecycle-process:2.6.2] /home/jit/.gradle/caches/transforms-3/b8d11ad8426ba34454d5792641948162/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:31:17-49
+89            <meta-data
+89-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+90                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+90-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+91                android:value="androidx.startup" />
+91-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+92        </provider>
+93
+94        <uses-library
+94-->[androidx.window:window:1.0.0] /home/jit/.gradle/caches/transforms-3/f70026d7d26498e4069a90e8f33ac7ca/transformed/window-1.0.0/AndroidManifest.xml:25:9-27:40
+95            android:name="androidx.window.extensions"
+95-->[androidx.window:window:1.0.0] /home/jit/.gradle/caches/transforms-3/f70026d7d26498e4069a90e8f33ac7ca/transformed/window-1.0.0/AndroidManifest.xml:26:13-54
+96            android:required="false" />
+96-->[androidx.window:window:1.0.0] /home/jit/.gradle/caches/transforms-3/f70026d7d26498e4069a90e8f33ac7ca/transformed/window-1.0.0/AndroidManifest.xml:27:13-37
+97        <uses-library
+97-->[androidx.window:window:1.0.0] /home/jit/.gradle/caches/transforms-3/f70026d7d26498e4069a90e8f33ac7ca/transformed/window-1.0.0/AndroidManifest.xml:28:9-30:40
+98            android:name="androidx.window.sidecar"
+98-->[androidx.window:window:1.0.0] /home/jit/.gradle/caches/transforms-3/f70026d7d26498e4069a90e8f33ac7ca/transformed/window-1.0.0/AndroidManifest.xml:29:13-51
+99            android:required="false" />
+99-->[androidx.window:window:1.0.0] /home/jit/.gradle/caches/transforms-3/f70026d7d26498e4069a90e8f33ac7ca/transformed/window-1.0.0/AndroidManifest.xml:30:13-37
+100
+101        <receiver
+101-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+102            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+102-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+103            android:directBootAware="false"
+103-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+104            android:enabled="true"
+104-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+105            android:exported="true"
+105-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+106            android:permission="android.permission.DUMP" >
+106-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+107            <intent-filter>
+107-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+108                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+108-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+108-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+109            </intent-filter>
+110            <intent-filter>
+110-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+111                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+111-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+111-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+112            </intent-filter>
+113            <intent-filter>
+113-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+114                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+114-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+114-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+115            </intent-filter>
+116            <intent-filter>
+116-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+117                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+117-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+117-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/jit/.gradle/caches/transforms-3/90a5c045bb237d34bfde7528c354fcd3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+118            </intent-filter>
+119        </receiver>
+120    </application>
+121
+122</manifest>

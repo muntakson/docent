@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">도슨트봇</string>
+    <string name="start_button">시작</string>
+    <string name="continue_button">안내시작</string>
+    <string name="settings">설정</string>
+    <string name="stop_button">정지</string>
+
+    <!-- Settings -->
+    <string name="settings_title">설정</string>
+    <string name="amr_ip_title">AMR IP 주소</string>
+    <string name="amr_ip_default">192.168.219.42</string>
+    <string name="backend_url_title">백엔드 URL</string>
+    <string name="backend_url_default">https://docent.rongrong.org</string>
+
+    <!-- Projector Settings -->
+    <string name="projector_section">프로젝터 설정</string>
+    <string name="find_projector">프로젝터 검색</string>
+    <string name="video_upload">동영상 선택</string>
+    <string name="stream_video">동영상 재생</string>
+    <string name="stop_stream">재생 중지</string>
+    <string name="no_projector_found">프로젝터를 찾을 수 없습니다</string>
+    <string name="projector_found">프로젝터 발견: %s</string>
+    <string name="select_video">동영상을 선택하세요</string>
+    <string name="video_selected">선택된 동영상: %s</string>
+    <string name="streaming_to">재생 중: %s</string>
+
+    <!-- Status -->
+    <string name="status_idle">대기 중</string>
+    <string name="status_welcome">환영합니다!</string>
+    <string name="status_navigating">이동 중</string>
+    <string name="status_speaking">안내 중</string>
+    <string name="status_playing_video">동영상 재생 중</string>
+
+    <!-- Zones -->
+    <string name="welcome_zone">웰컴 존</string>
+    <string name="zone_arrival">%s에 도착했어요</string>
+
+    <!-- Errors -->
+    <string name="error_connection">연결 오류</string>
+    <string name="error_amr_not_connected">AMR에 연결할 수 없습니다</string>
+    <string name="error_backend_not_connected">백엔드에 연결할 수 없습니다</string>
+
+    <!-- Toast messages -->
+    <string name="toast_video_selected">동영상이 선택되었습니다</string>
+    <string name="toast_projector_connected">프로젝터에 연결되었습니다</string>
+    <string name="toast_streaming_started">재생이 시작되었습니다</string>
+    <string name="toast_streaming_stopped">재생이 중지되었습니다</string>
+
+    <string name="save">저장</string>
+    <string name="cancel">취소</string>
+    <string name="ok">확인</string>
+</resources>
