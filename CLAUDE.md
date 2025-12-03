@@ -120,3 +120,4 @@ For proxy_server.py:
 - SSL certs: `/etc/ssl/certs/docent.rongrong.org.pem`, `/etc/ssl/private/docent.rongrong.org.key`
 - Systemd service: `/etc/systemd/system/docent-proxy.service`
 - Logs: `/var/log/nginx/docent.access.log`, `/var/log/nginx/docent.error.log`
+- Reeman AMR manual API list are at ./docs/*.pdf
